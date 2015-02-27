@@ -1,0 +1,9 @@
+m.a.j 27/02/2015
+
+*Le modèle de Black-Scholes nous donne la fonction caractéristique psi. A partir de cela il faut calculer explicitement la valeur de l'option (difficile), ainsi qu'implémenter un calcul numérique par la FFT (également difficile).
+
+*Apprendre et maîtriser le module (http://www.fftw.org/), à défaut d'en trouver un autre plus simple d'usage. (Il faut pê demander au prof des conseils).
+
+*Faire le point sur le permier article. Avoir des courbes comparants les résultats obtenus de manière exacte et par approximation. Faire varier les paramètres.
+
+*Attaquer le second article.
