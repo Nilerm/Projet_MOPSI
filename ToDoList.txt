@@ -1,4 +1,4 @@
-m.a.j 27/02/2015
+﻿m.a.j 27/02/2015
 
 *Le modèle de Black-Scholes nous donne la fonction caractéristique psi. A partir de cela il faut calculer explicitement la valeur de l'option (difficile), ainsi qu'implémenter un calcul numérique par la FFT (également difficile).
 
@@ -7,3 +7,22 @@ m.a.j 27/02/2015
 *Faire le point sur le permier article. Avoir des courbes comparants les résultats obtenus de manière exacte et par approximation. Faire varier les paramètres.
 
 *Attaquer le second article.
+
+m.a.j 28/02/2015
+
+*Pour le calcul à la main j'ai beau essayer je n'y arrive pas... 
+ J'ai même essayer de calculer à la main, soit la somme associée à l'intégrale discrète, rien ne marche...
+ J'attend la répons d'Alfonsi (cf le mail où je t'ai mis en copie)
+
+*J'ai fais un script avec toutes les fonctions (VG, BS) et les x[j] associées (je crois pas qu'il y ait besoin d'autres choses pour
+ faire tourner la FFT si?) Dis moi si tu veux que j'installe le module. 
+ Il faudra que je fasse 2-3 calculs à la main pour voir si y'a pas d'erreur dans mon script mais j'ai pas l'impression.
+
+--> Résumé: Article 1: Faire à la main (je suis sur le coup), implémenter FFT fonction que j'ai écrite 
+		       (je pense pas que ça soit très dur une fois que FFTW est installé non?) 
+
+*Article 2: Je commence ce soir et toute la journée demain en attendant un retour de ta part. 
+
+*Poster, je commence à le faire? (peut être au moins juste ce qu'on a présenté à Chicago
+
+*Envoyé un mail à Alfonsi sur ce qu'on a fait? Je l'ai pas encore fait parceque j'avais déjà une question et je voulais pas le surcharger.
