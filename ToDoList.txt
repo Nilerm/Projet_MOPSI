@@ -1,12 +1,43 @@
-﻿m.a.j 27/02/2015
+﻿m.a.j 01/03/2015 18:00
 
-*Le modèle de Black-Scholes nous donne la fonction caractéristique psi. A partir de cela il faut calculer explicitement la valeur de l'option (difficile), ainsi qu'implémenter un calcul numérique par la FFT (également difficile).
+Article 1:
 
-*Apprendre et maîtriser le module (http://www.fftw.org/), à défaut d'en trouver un autre plus simple d'usage. (Il faut pê demander au prof des conseils).
+*Il reste à faire les même choses que précedemment sauf qu'il faudrait en plus chronométrer le temps d'exécution pour les 2 formules
 
-*Faire le point sur le permier article. Avoir des courbes comparants les résultats obtenus de manière exacte et par approximation. Faire varier les paramètres.
+*Pareil, continuer dans la lancée de ce que t'avais fait à Chicago et faire une fonction qui calculerai l'erreur ou même la RMSE si on peut.
 
-*Attaquer le second article.
+*Relancer Alfonsi s'il n'a pas répondu demain soir 16h, tu en penses quoi? 
+
+**** Faudrait qu'on discute un peu du coup de l'article de ce qu'on en présente mercredi ***
+
+***Aricle 2:
+
+*Déjà il faudrait comprendre l'article. Je pense avoir compris tous les calcus sauf au bout d'un moment quand il intègre exp(iwt) sut [l,/infty]. 
+ 2 choses qui me choque: 1) Comment le mec obtient le résultat?! 2) Depuis quand c'est intégrable ce truc...? Y'a clairement un truc qui m'échappe.
+
+En gros ce que je pense qu'on peut faire vis-à-vis de cet aricle: 
+
+*Déjà, faut voir si on parle de manière générale ou si on reste sur BS (le mieux est de faire les 2). 
+
+*On peut essayer d'implémenter l'extrapolation de Richardson, cf. Méthode de Romberg quand appliqué à l'intégration numérique (grosse plus-value) et 
+ les comparer à Simpson et Trapeze et et appliquer FFT dessus après si c'est possible.
+
+*Aussi on peut essayer d'appliquer cette histoire de 2 intégrales en 1 à BS. Dans l'article 1, ils font un truc totalement différent j'ai l'impression.
+
+*Le 3 me semble pas super important.
+
+Je vois pas autre chose là tout de suite à part le poster. Je mettrais une première version du poster ce soir sur git.
+
+***A faire (ça serait bien que ça soit fini demain soir, hésite pas à me dire si tu trouve ça déséquilibré en ta faveur, mais j'imagine pas du tout la complexité de
+FFTW)
+
+*FFTW avec BS et VG (toi plutôt) avec différents paramètres.
+
+*Poster (moi)
+
+*Extrapolation de Richardson (moi) et comparaison article 1 pour BS.
+
+Si tu as des idées ou que tu trouves ça pas ouf, hésite pas à me le dire.
 
 m.a.j 28/02/2015
 
@@ -26,3 +57,14 @@ m.a.j 28/02/2015
 *Poster, je commence à le faire? (peut être au moins juste ce qu'on a présenté à Chicago
 
 *Envoyé un mail à Alfonsi sur ce qu'on a fait? Je l'ai pas encore fait parceque j'avais déjà une question et je voulais pas le surcharger.
+
+m.a.j 27/02/2015
+
+*Le modèle de Black-Scholes nous donne la fonction caractéristique psi. A partir de cela il faut calculer explicitement la valeur de l'option (difficile), ainsi qu'implémenter un calcul numérique par la FFT (également difficile).
+
+*Apprendre et maîtriser le module (http://www.fftw.org/), à défaut d'en trouver un autre plus simple d'usage. (Il faut pê demander au prof des conseils).
+
+*Faire le point sur le permier article. Avoir des courbes comparants les résultats obtenus de manière exacte et par approximation. Faire varier les paramètres.
+
+*Attaquer le second article.
+
