@@ -1,7 +1,7 @@
 #include <complex>
-#include <math.h>
 
 #define _USE_MATH_DEFINES
+#include <math.h>
 
 using namespace std;
 
@@ -11,16 +11,13 @@ class BS{
 	friend class PHI;
 	friend class PSI;
 private:
-	float r,sigma,t,W,S0;
+	float r,sigma,S0;
 public:
 	BS(){
-		r=0;sigma=0;t=0;W=0;S0=1;
+		r=0;sigma=0;S0=1;
 	}
-	BS(float r_,float sigma_,float t_,float W_,float S0_=1){
-		r=r_; sigma=sigma_; t=t_; W=W_; S0=S0_;
-	}
-	float operator()(){
-		return S0*exp((r-pow(sigma,2)/2)*t+sigma*W);
+	BS(float r_,float sigma_,float S0_=1){
+		r=r_; sigma=sigma_; S0=S0_;
 	}
 };
 
@@ -29,7 +26,7 @@ class PHI{
 	friend class PSI;
 private:
 	BS bs;
-	double T; //T est-il égal au t de bs ?
+	double T; 
 public:
 	PHI(){
 		T=0;
@@ -45,7 +42,11 @@ public:
 	}
 };
 
+class Xj_trap;
+
 class PSI{
+	friend class Xj_trap;
+private:
 	PHI phi;
 	double alpha;
 public:
@@ -75,4 +76,9 @@ public:
 		complex<double> x=expo*psi(eta*j);
 		return x;
 	}
+	double prefact(int k, int N){
+		double factor=eta*exp(-psi.alpha*M_PI*(2*k-N)/(N*eta))/M_PI;
+		return factor;
+	}
+
 };
