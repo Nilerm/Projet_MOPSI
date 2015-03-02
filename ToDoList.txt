@@ -1,12 +1,17 @@
-﻿m.a.j 01/03/2015 18:00
+﻿m.a.j 02/03/2015
 
 Article 1:
 
 *Il reste à faire les même choses que précedemment sauf qu'il faudrait en plus chronométrer le temps d'exécution pour les 2 formules
+//Faisable dès qu'on a un code qui tient la route.
 
 *Pareil, continuer dans la lancée de ce que t'avais fait à Chicago et faire une fonction qui calculerai l'erreur ou même la RMSE si on peut.
+//Possible si on a des valeurs exactes pour avoir une erreur numérique empirique.
 
 *Relancer Alfonsi s'il n'a pas répondu demain soir 16h, tu en penses quoi? 
+//Ca me paraît une bonne idée, même demander si on peut passer à son bureau (pê trop tard). J'ai aussi écrit une petite partie concernant le programme C++.
+
+//Je ferai les deux premiers points dans l'avion car j'ai pas besoin du net.
 
 **** Faudrait qu'on discute un peu du coup de l'article de ce qu'on en présente mercredi ***
 
@@ -32,6 +37,7 @@ Je vois pas autre chose là tout de suite à part le poster. Je mettrais une pre
 FFTW)
 
 *FFTW avec BS et VG (toi plutôt) avec différents paramètres.
+//ça ne fonctionne pas pour l'instant. Mais on sait dire pourquoi les résultats ne sont pas recevables.
 
 *Poster (moi)
 
