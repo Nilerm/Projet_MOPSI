@@ -5,18 +5,18 @@
 
 using namespace std;
 
-//attention à l'utilisation des float ou double
+//attention à l'utilisation des double ou double
 class PHI; class PSI;
 class BS{
 	friend class PHI;
 	friend class PSI;
 private:
-	float r,sigma,S0;
+	double r,sigma,S0;
 public:
 	BS(){
-		r=0;sigma=0;S0=1;
+		r=0;sigma=0.01;S0=1;
 	}
-	BS(float r_,float sigma_,float S0_=1){
+	BS(double r_,double sigma_,double S0_=1){
 		r=r_; sigma=sigma_; S0=S0_;
 	}
 };
@@ -29,16 +29,18 @@ private:
 	double T; 
 public:
 	PHI(){
-		T=0;
+		T=1000;
 	}
 	PHI(BS bs_, double T_){
 		bs=bs_; T=T_;
 	}
 	complex<double> operator()(complex<double> u){
-		double x=-1/2*(pow(u.real(),2)-pow(u.imag(),2))*pow(bs.sigma,2)*T-u.imag()*(log(bs.S0)+(bs.r-pow(bs.sigma,2)/2)*T);
+		/*double x=-1/2*(pow(u.real(),2)-pow(u.imag(),2))*pow(bs.sigma,2)*T-u.imag()*(log(bs.S0)+(bs.r-pow(bs.sigma,2)/2)*T);
 		double y=u.real()*(log(bs.S0)+(bs.r-pow(bs.sigma,2)/2)*T)-u.real()*u.imag()*pow(bs.sigma,2)*T;
-		complex<double> z=complex<double>(x,y);
-		return exp(z);
+		complex<double> z=complex<double>(x,y);*/
+		complex<double>z(0,-pow(bs.sigma,2)*T/2);
+		double t=-T/2*pow(bs.sigma,2);
+		return exp(z*u+t*pow(u,2));
 	}
 };
 
@@ -51,16 +53,18 @@ private:
 	double alpha;
 public:
 	PSI(){
-		alpha=0;
+		alpha=1.1;
 	}
 	PSI(PHI phi_,double alpha_){
 		phi=phi_; alpha=alpha_;
 	}
 	complex<double> operator()(double v){
-		complex<float> z=complex<float>(v,-alpha-1);
-		complex<float> num=exp(-phi.bs.r*phi.T)*phi(z); 
-		complex<float> denum=complex<float>(pow(alpha,2)+alpha-pow(v,2),(2*alpha+1)*v);
-		return (num/denum);
+		double k=0;//attention à ce cas qu'on devrat surement rentrer en parametre
+		complex<double> z1=complex<double>(0,-k*v);//attention
+		complex<double> z=complex<double>(v,-alpha-1);
+		complex<double> num=exp(-phi.bs.r*phi.T)*phi(z); 
+		complex<double> denum=complex<double>(pow(alpha,2)+alpha-pow(v,2),(2*alpha+1)*v);
+		return (num/denum*exp(z1)/M_PI*exp(-alpha*k));
 	}
 };
 
@@ -81,4 +85,57 @@ public:
 		return factor;
 	}
 
+};
+/*
+class expo_complex{
+public:
+	complex<double> operator()(double x){
+		int k=10;
+		complex<double> z=complex<double>(0,-k*x);
+	    return exp(z);};
+};
+*/
+class int1_attari{ //premiere des deux deux intégrales dont parle Attari
+private:
+	PHI phi;
+public:
+  complex<double> operator()(double x){
+	double k=0;//parametre à modifier
+	double I1=phi(x).imag();
+	double R1=phi(x).real();
+		double num=I1*cos(x*k)-R1*sin(x*k);
+	
+	return num/x;
+  }
+};
+
+class int2_attari{ //premiere des deux deux intégrales dont parle Attari
+private:
+	PHI phi;
+public:
+  complex<double> operator()(double x){
+	double k=0;//parametre à modifier
+	double I2=phi(complex<double>(x,-1)).imag();
+	double R2=phi(complex<double>(x,-1)).real();
+		double num=I2*cos(x*k)-R2*sin(x*k);
+	
+	return num/x;
+  }
+};
+
+class int_attari{ //2 intégrales en une Attari
+private:
+	PHI phi;
+public:
+  complex<double> operator()(double x){
+	double k=0;//parametre a modifier
+	double I2=phi(x).imag();
+	double I1=phi(complex<double>(x,-1)).imag();
+	double R2=phi(x).real();
+	double R1=phi(complex<double>(x,-1)).real();
+		double num=(R2+I2/x)*cos(x*k)+(I2-R2/x)*sin(x*k);
+		double denum=1+pow(x,2);
+	
+	return num/denum;
+  }
 };
