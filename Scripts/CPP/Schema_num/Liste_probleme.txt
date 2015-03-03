@@ -1,0 +1,7 @@
+Liste des problèmes:
+
+*Les deux intégrales -cf Attari- ne sont pas égales.
+
+*Méthode d'intégration numérique: les intégrales explosent alors que normalement elles sont finies.
+
+*FFT déconne

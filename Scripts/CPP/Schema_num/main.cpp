@@ -2,6 +2,7 @@
 #include <math.h>
 #include "fonctions.cpp"
 #include <complex>
+#include <Windows.h>
 using namespace std;
 
 //parametre actuel:
@@ -33,19 +34,17 @@ public:
 template<typename Function>
 complex<double> trapeze(Function f, double a, double b, int n){
 	double step=(b-a)/n;
-	complex<double> area=step/2*(f(a)+f(b));
-	//cout << f(a)+f(b) <<endl;
-	//cout << area <<endl;
+	complex<double> area=(f(a)+f(b))*0.5;
 	for(int i=1; i<n; i++){
-		area+=step*f(a+i*step);
+		area=area+f(a+i*step);
 	}
-	return area;
+	return step*area;
 }
 
 template<typename Function>
-double simpson(Function f,double a, double b, int n){
+complex<double> simpson(Function f,double a, double b, int n){
 	double step=(b-a)/n;
-	double area=(f(a)+f(b));
+	complex<double> area=(f(a)+f(b));
 	for(int i=1; i<n; i++){
 		if(i%2)area=area+4*f(a+i*step);
 		else area=area+f(a+i*step);
@@ -70,7 +69,7 @@ complex<double> romberg(Function f,double a,double b, int n){
 }
 
 double CDF(int n,double x){ //developpement de la fonctio de répartition en une série intière
-	double sum=0;
+	double sum=x;;
 	double terme=x;
 	for(int i=1;i<n;i++){
 	terme=terme*pow(x,2)/(2*i+1);
@@ -81,7 +80,7 @@ double CDF(int n,double x){ //developpement de la fonctio de répartition en une
 
 double Call_value_theory(double T, double k, double S,double sigma,double r){
 	double d1,d2;
-	int n=10000;
+	int n=1000000;
 	d1=1/(sigma*sqrt(T))*(log(S)-k+(r+pow(sigma,2)/2)	*T);
 	d2=1/(sigma*sqrt(T))*(log(S)-k+(r-pow(sigma,2)/2)*T);
 	return(CDF(n,d1)*S-CDF(n,d2)*exp(-r*T+k));
@@ -91,38 +90,41 @@ complex<double> Value_2_int(double T, double borne_sup,double St=1,double K=1){ 
 	int1_attari int1;
 	int2_attari int2;
 	int r=0; //voir comment le choper avec les parametres
-	return(St*(0.5+1/M_PI*romberg(int1,0.000000000001,borne_sup,20))-exp(-r*T)*K*(0.5+1/M_PI*romberg(int2,0.000000000001,borne_sup,20)));
+	return(St*(0.5+1/M_PI*romberg(int1,0.01,borne_sup,35))-exp(-r*T)*K*(0.5+1/M_PI*romberg(int2,0.01,borne_sup,35)));
 }
 
 complex<double> Value_1_int(double T, double borne_sup,double St=1,double K=1){ //calcul avec une seule intégrale, on doit trouver la même chose
 	int_attari integrand;
 	int r=0; //voir comment le choper avec les parametres
-	return(St-exp(-r*T)*K/2-exp(-r*T)*K*(1/M_PI)*romberg(integrand,0.000000000001,borne_sup,20));
+	return(St-exp(-r*T)*K/2-exp(-r*T)*K*(1/M_PI)*romberg(integrand,0.000000000001,borne_sup,25));
 }
 
 int main(){
 	expo f;
+	expo_complex exp;
 	tot g;
 	sinu s;
 	PSI psi;
 	PHI phi;
 	double Pi=3.14159265358979;
-	double a=0.0000001;
-	double b=1000000000000000; //plus b augmente, plus on a des trucs aberrants.
 	poly p;
-	/*for(int i=1; i<=1; i++){
-		cout<<"Iteration "<<i<<endl;
-		cout<<"Trapeze : "<<endl; 
-		cout<<trapeze(psi,a,b,1000000000*i)<<endl;
-		/*cout<<"Simpson : "<<endl;
-		cout<<abs(simpson(psi,a,b,1000*i))<<endl;
-	}
+	double b=1000;
+
 	cout<<"Calcul theorique: "<<endl;
-	cout << Call_value_theory(1000,0,1,0.01,0) <<endl;
+	cout << Call_value_theory(1000,0,1,0.1,0) <<endl;
+	//initialisation du chrono
+	DWORD begin_time=GetTickCount();
+	cout <<"attari1:" <<Value_1_int(10000,b,1,1) <<endl;
+	DWORD end_time=GetTickCount()-begin_time;
+	cout<<"temps d'execution : "<<end_time<<".ms"<<endl;
+	begin_time=GetTickCount();
+	cout<<"attari2:" <<Value_2_int(10000,b,1,1) <<endl;
+	end_time=GetTickCount()-begin_time;
+	cout<<"temps d'execution : "<<end_time<<".ms"<<endl;
+	cout<<"Trapeze : "<<endl; 
+	cout<<trapeze(psi,-b,b,100000)<<endl;
 	cout<<"Romberg : "<<endl;
-	cout<<romberg(psi,a,b,50) <<endl;*/
-	cout <<"attari1:" <<Value_1_int(1000,b,1,1) <<endl;
-	cout<<"attari2:" <<Value_2_int(1000,b,1,1) <<endl;
+	cout<<romberg(psi,-b,b,25) <<endl;
 	//on devrait obtenir le même résultat pour les 2 derniers trucs mais là non.
 
 	while(true){}
