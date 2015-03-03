@@ -91,13 +91,13 @@ complex<double> Value_2_int(double T, double borne_sup,double St=1,double K=1){ 
 	int1_attari int1;
 	int2_attari int2;
 	int r=0; //voir comment le choper avec les parametres
-	return(St*(0.5+1/M_PI*romberg(int1,0.000001,borne_sup,25))-exp(-r*T)*K*(0.5+1/M_PI*romberg(int2,0.000001,borne_sup,25)));
+	return(St*(0.5+1/M_PI*romberg(int1,0.000000000001,borne_sup,20))-exp(-r*T)*K*(0.5+1/M_PI*romberg(int2,0.000000000001,borne_sup,20)));
 }
 
 complex<double> Value_1_int(double T, double borne_sup,double St=1,double K=1){ //calcul avec une seule intégrale, on doit trouver la même chose
 	int_attari integrand;
 	int r=0; //voir comment le choper avec les parametres
-	return(St-exp(-r*T)*K-exp(-r*T)*K*(1/M_PI)*romberg(integrand,0.000001,borne_sup,25));
+	return(St-exp(-r*T)*K/2-exp(-r*T)*K*(1/M_PI)*romberg(integrand,0.000000000001,borne_sup,20));
 }
 
 int main(){
@@ -108,7 +108,7 @@ int main(){
 	PHI phi;
 	double Pi=3.14159265358979;
 	double a=0.0000001;
-	double b=100000000000; //plus b augmente, plus on a des trucs aberrants.
+	double b=1000000000000000; //plus b augmente, plus on a des trucs aberrants.
 	poly p;
 	/*for(int i=1; i<=1; i++){
 		cout<<"Iteration "<<i<<endl;

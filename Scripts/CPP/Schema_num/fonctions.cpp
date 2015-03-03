@@ -59,7 +59,7 @@ public:
 		phi=phi_; alpha=alpha_;
 	}
 	complex<double> operator()(double v){
-		double k=0;//attention à ce cas qu'on devrat surement rentrer en parametre
+		double k=1;//attention à ce cas qu'on devrat surement rentrer en parametre
 		complex<double> z1=complex<double>(0,-k*v);//attention
 		complex<double> z=complex<double>(v,-alpha-1);
 		complex<double> num=exp(-phi.bs.r*phi.T)*phi(z); 
@@ -95,12 +95,12 @@ public:
 	    return exp(z);};
 };
 */
-class int1_attari{ //premiere des deux deux intégrales dont parle Attari
+class int2_attari{ //premiere des deux deux intégrales dont parle Attari
 private:
 	PHI phi;
 public:
   complex<double> operator()(double x){
-	double k=0;//parametre à modifier
+	double k=1;//parametre à modifier
 	double I1=phi(x).imag();
 	double R1=phi(x).real();
 		double num=I1*cos(x*k)-R1*sin(x*k);
@@ -109,17 +109,17 @@ public:
   }
 };
 
-class int2_attari{ //premiere des deux deux intégrales dont parle Attari
+class int1_attari{ //premiere des deux deux intégrales dont parle Attari
 private:
 	PHI phi;
 public:
   complex<double> operator()(double x){
-	double k=0;//parametre à modifier
-	double I2=phi(complex<double>(x,-1)).imag();
+	double k=1;//parametre à modifier
+	/*double I2=phi(complex<double>(x,-1)).imag();
 	double R2=phi(complex<double>(x,-1)).real();
-		double num=I2*cos(x*k)-R2*sin(x*k);
-	
-	return num/x;
+		double num=I2*cos(x*k)-R2*sin(x*k);*/
+	double result=(exp(complex<double>(0,-x*log(k)))*phi(complex<double>(x,-1))/(complex<double>(0,x)*phi(complex<double>(0,-1)))).real();
+	return result;
   }
 };
 
@@ -128,13 +128,13 @@ private:
 	PHI phi;
 public:
   complex<double> operator()(double x){
-	double k=0;//parametre a modifier
+	double k=1;//parametre a modifier
 	double I2=phi(x).imag();
 	double I1=phi(complex<double>(x,-1)).imag();
 	double R2=phi(x).real();
 	double R1=phi(complex<double>(x,-1)).real();
 		double num=(R2+I2/x)*cos(x*k)+(I2-R2/x)*sin(x*k);
-		double denum=1+pow(x,2);
+		double denum=(1+pow(x,2));
 	
 	return num/denum;
   }
